@@ -1,5 +1,6 @@
 # 1DV523 - Assignment 2
-A CRUD application for code snippets using Node.js, Express, MongoDB and Mongoose
+A CRUD application for code snippets using Node.js, Express, MongoDB and Mongoose.
+Handlebars is used as template engine.
 
 Assignment description:
 
