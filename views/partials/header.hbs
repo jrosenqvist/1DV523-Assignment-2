@@ -1,0 +1,43 @@
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="/">Super Snippets!</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="/snippets">Browse</a>
+        </li>
+        <li class="nav-item">          
+          <a class="nav-link" href="/snippets/create">Create</a>
+        </li>
+        {{#if loggedin}}
+        <li class="nav-item">
+          <a class="nav-link" href="/snippets/author/{{userid}}">Your snippets</a>
+        </li>
+        {{/if}}
+      </ul>
+
+      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+        {{#if loggedin}}
+        <li class="nav-item">
+          <a class="nav-link" href="/user/profile/{{userid}}">Profile</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/logout">Logout</a>
+        </li>
+        {{else}}
+        <li class="nav-item">
+          <a class="nav-link" href="/user/register">Sign up</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/login">Login</a>
+        </li>
+        {{/if}}
+      </ul>
+
+    </div>
+  </nav>
+</header>

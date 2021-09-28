@@ -1,0 +1,53 @@
+<h2>
+    <span class="fas fa-id-card"></span> Profile
+</h2>
+<form method="post" action="../update/{{userid}}">
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" class="form-control" name="username" id="username" value="{{user.username}}" />
+    </div>
+    <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" class="form-control" name="password" id="password"
+            placeholder="Leave empty if you wish to keep your current password" />
+
+    </div>
+    <div class="form-group">
+        <input type="password" class="form-control" name="confirmpassword" id="confirmpassword"
+            placeholder="Confirm new password" />
+
+    </div>
+    <button type="submit" class="btn btn-large btn-primary" onclick="empty()">Update</button>
+</form>
+
+<p>
+    <form method="post" action="../delete/{{userid}}">
+        <div class="form-group">
+            <div id="delete">
+                <button type="button" class="btn btn-large btn-danger"
+                    onclick="showConfirm()">Delete</button>&nbsp;<label for="delete">Click
+                    here if you wish to delete your account. This will also delete all your snippets.</label>
+            </div>
+            <div id="confirm" class="d-none">
+                <button type="submit" class="btn btn-large btn-success">Confirm</button>&nbsp;<label
+                    for="confirm">Confirm your deletion.</label>
+            </div>
+        </div>
+    </form>
+</p>
+
+<script type="application/javascript">
+    function empty() {
+        var pass1 = document.querySelector('#password')
+        var pass2 = document.querySelector('#confirmpassword')
+        if (pass1.value.length > 0 && pass2.value.length === 0) {
+            pass1.value = null
+        }
+    }
+    function showConfirm() {
+        var deleteDiv = document.querySelector('#delete')
+        var confirmDiv = document.querySelector('#confirm')
+        deleteDiv.classList.add('d-none')
+        confirmDiv.classList.remove('d-none')
+    }
+</script>

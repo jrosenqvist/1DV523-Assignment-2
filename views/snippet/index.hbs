@@ -1,0 +1,131 @@
+<h2>
+{{#if byAuthor}}
+    <span class="fas fa-code"></span> Snippets by {{byAuthor}}
+    </h2>
+{{else}}
+    <span class="fas fa-code"></span> Browse snippets
+    </h2>    
+{{/if}}
+{{#if snippets}}
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>Title</th>
+            <th>Preview</th>
+            {{#if byAuthor}}
+            {{else}}
+            <th>Author</th>
+            {{/if}}
+            <th class="text-center">Added</th>
+        </tr>
+    </thead>
+    <tbody>
+        {{#each snippets}}
+        <tr id="{{_id}}">
+            {{#if byAuthor}}
+            <td onclick="byAuthorShowSnippet()" onmouseover="mouseover()" onmouseout="mouseout()" style="cursor: pointer" class="highlight">
+                {{title}}
+            </td>
+            {{else}}
+            <td onclick="showSnippet()" onmouseover="mouseover()" onmouseout="mouseout()" style="cursor: pointer" class="highlight">
+                {{title}}
+            </td>
+            {{/if}}
+            {{#if byAuthor}}
+            <td onclick="byAuthorShowSnippet()" onmouseover="mouseover()" onmouseout="mouseout()" style="cursor: pointer" class="highlight">
+                <div class="highlight code-content">{{content}}</div>
+            </td>
+            {{else}}
+            <td onclick="showSnippet()" onmouseover="mouseover()" onmouseout="mouseout()" style="cursor: pointer">
+                <div class="highlight code-content">{{content}}</div>
+            </td>
+            {{/if}}
+            
+            {{#if byAuthor}}
+            {{else}}
+            <td>                            
+                <a href="./snippets/by/{{author.username}}">{{author.username}}</a>                
+            </td>
+            {{/if}}
+            {{#if byAuthor}}
+            <td onclick="byAuthorShowSnippet()" onmouseover="mouseover()" onmouseout="mouseout()" style="cursor: pointer" class="text-center">
+                {{createdAt}}
+            </td>
+            {{else}}
+            <td onclick="showSnippet()" onmouseover="mouseover()" onmouseout="mouseout()" style="cursor: pointer" class="text-center">
+                {{createdAt}}
+            </td>
+            {{/if}}
+        </tr>
+        {{/each}}
+    </tbody>
+</table>
+{{else}}
+<p>There are currently no publicly listed snippets. Why not <a href="snippets/create">create</a> one?</p>
+{{/if}}
+<style>
+     .clickable {
+        color: #777;
+        text-decoration: underline;
+    }   
+</style>
+
+<script>
+    document.querySelectorAll('.code-content').forEach(content => {
+        content.textContent = content.textContent.slice(0, 200) + '...'
+    })
+
+    function showSnippet() {
+        const id = event.currentTarget.parentNode.id
+        window.location.href = './snippets/' + id
+    }
+
+    function byAuthorShowSnippet() {
+        const id = event.currentTarget.parentNode.id
+        window.location.href = './../../snippets/' + id
+    }
+
+    function remove() {
+        event.stopPropagation()
+        event.currentTarget.classList.add('d-none')
+        event.currentTarget.nextElementSibling.classList.remove('d-none')
+    }
+
+    function confirmRemove() {
+        const tr = event.currentTarget.parentNode
+        fetch('../../api/deleteSnippet', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: tr.id
+            })
+        })
+            .then(res => {
+                if (res.ok) {
+                    tr.remove()
+                } else {
+                    console.log(res.status)
+                }
+
+            })
+            .catch(err => console.log(err))
+    }
+
+    function mouseover() {
+        const elems = event.currentTarget.parentNode.getElementsByClassName('highlight')
+
+        for (var i = 0; i < elems.length; i++) {
+            elems[i].classList.add('clickable')
+        }
+    }
+
+    function mouseout() {
+        const elems = event.currentTarget.parentNode.getElementsByClassName('highlight')
+        for (var i = 0; i < elems.length; i++) {
+            elems[i].classList.remove('clickable')
+        }
+    }
+
+</script>
