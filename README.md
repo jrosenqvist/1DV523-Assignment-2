@@ -1,4 +1,4 @@
-# 1DV523---Assignment-2
+# 1DV523 - Assignment 2
 A CRUD application for code snippets using Node.js, Express, MongoDB and Mongoose
 
 Assignment description:
@@ -19,7 +19,7 @@ Assignment description:
 >
 >As always, we have the following requirements:
 >
->    The application should be written as a JavaScript application following the JavaScript Standard Style code standard, using the Express API, running on the Node.js platform.
->    The only command that the examiner will need to execute to run your application after cloning it from GitLab is npm install and npm start.
->    You must use GitLab, and make several commits, to show how your completed assignment has evolved from the start to the end.
->    To announce that you have completed the assignment, you must create a release of your examination repository on GitLab. If a release is missing the examinators will not grade your assignment.
+>    - The application should be written as a JavaScript application following the JavaScript Standard Style code standard, using the Express API, running on the Node.js platform.
+>    - The only command that the examiner will need to execute to run your application after cloning it from GitLab is npm install and npm start.
+>    - You must use GitLab, and make several commits, to show how your completed assignment has evolved from the start to the end.
+>    - To announce that you have completed the assignment, you must create a release of your examination repository on GitLab. If a release is missing the examinators will not grade your assignment.
